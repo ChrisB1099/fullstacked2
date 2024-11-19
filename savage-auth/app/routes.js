@@ -9,7 +9,7 @@ module.exports = function(app, passport, db) {
 
     // PROFILE SECTION =========================
     app.get('/profile', isLoggedIn, function(req, res) {
-        db.collection('messages').find().toArray((err, result) => {
+        db.collection('movies').find().toArray((err, result) => {
           if (err) return console.log(err)
           res.render('profile.ejs', {
             user : req.user,
@@ -28,19 +28,19 @@ module.exports = function(app, passport, db) {
 
 // message board routes ===============================================================
 
-    app.post('/messages', (req, res) => {
-      db.collection('messages').save({name: req.body.name, msg: req.body.msg, thumbUp: 0}, (err, result) => {
+    app.post('/newMovies', (req, res) => {
+      db.collection('movies').save({movie: req.body.movie, hearts: false}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
         res.redirect('/profile')
       })
     })
 
-    app.put('/messages', (req, res) => {
-      db.collection('messages')
-      .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
+    app.put('/addToWatched', (req, res) => {
+      db.collection('movies')
+      .findOneAndUpdate({movie: req.body.movie}, {
         $set: {
-          thumbUp:req.body.thumbUp + 1
+          hearts: true
         }
       }, {
         sort: {_id: -1},
@@ -51,11 +51,11 @@ module.exports = function(app, passport, db) {
       })
     })
 
-    app.put('/messagesdown', (req, res) => {
-      db.collection('messages')
-      .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
+    app.put('/removeFromWatched', (req, res) => {
+      db.collection('movies')
+      .findOneAndUpdate({movie: req.body.movie}, {
         $set: {
-          thumbUp:req.body.thumbUp - 1
+          hearts: false
         }
       }, {
         sort: {_id: -1},
@@ -66,8 +66,10 @@ module.exports = function(app, passport, db) {
       })
     })
 
-    app.delete('/messages', (req, res) => {
-      db.collection('messages').findOneAndDelete({name: req.body.name, msg: req.body.msg}, (err, result) => {
+    
+
+    app.delete('/deleteMovie', (req, res) => {
+      db.collection('movies').findOneAndDelete({movie: req.body.movie}, (err, result) => {
         if (err) return res.send(500, err)
         res.send('Message deleted!')
       })
