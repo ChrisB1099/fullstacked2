@@ -8,10 +8,20 @@
 </head>
 <body>
 
-        <div class="col-sm-6">
+        
           <div class="container">
           <h1>Movie Tracker</h1>
         </div>
+
+        <div class="container2">
+          <h2>Add Movies</h2>
+          <form action="/newMovies" method="POST">
+            <input type="text" placeholder="name movie" name="movie">
+            <button>Submit</button>
+          </form>
+        </div>
+<div class="container5">
+        <div class="container3">
           <h3>Movies to Watch</h3>
           <ul class="messages">
           <% for(var i=0; i<messages.length; i++) {%>
@@ -24,9 +34,10 @@
             <% } %>
           <% } %>
           </ul>
+        </div>
 
-
-          <div class="col-sm-6">
+          <div class="container4">
+        
             <h3>Movies Watched</h3>
             <ul class="messages">
             <% for(var i=0; i<messages.length; i++) {%>
@@ -40,22 +51,9 @@
               <% } %>
             <% } %>
             </ul>
-            <div class="container2">
-            <h2>Add Movies</h2>
-            <form action="/newMovies" method="POST">
-              <input type="text" placeholder="name movie" name="movie">
-              <button>Submit</button>
-            </form>
           </div>
-          <!-- <h2>Add a message</h2>
-        <% if (user.local.email) { %>
-          <form action="/messages" method="POST">
-            <input type="text" value="<%= user.local.email %>" name="name">
-            <input type="text" placeholder="message" name="msg">
-            <button type="submit">Submit</button>
-          </form>
         </div>
-        <% } %> -->
+          
 
 </div>
 
