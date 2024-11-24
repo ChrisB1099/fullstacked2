@@ -1,6 +1,6 @@
 ## Movie Tracker
 ![Thumbnail](savage-auth/public/img/page.jpg)
- 
+ Link to project: https://movie-tracker-ykx0.onrender.com
  ## How It's Made:
  Tech used: EJS, CSS, JavaScript, Node.js, Passport.js, MongoDB
 
